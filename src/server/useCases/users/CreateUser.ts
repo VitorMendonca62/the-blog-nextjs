@@ -39,7 +39,7 @@ export default class CreateUserUseCase {
       }
 
       const password = bcrypt.hashSync(String(_password), 10);
-      const id = v4().slice(0, 13);
+      const id = v4();
       const dateNow = new Date();
 
       const _user: IUser = {
@@ -62,7 +62,12 @@ export default class CreateUserUseCase {
         data: {},
       };
     } catch (err: unknown) {
-      return errorInServer(err);
+      return {
+        error: true,
+        status: 500,
+        msg: 'Erro na criação do usuário.',
+        data: err,
+      };
     }
   }
 }
