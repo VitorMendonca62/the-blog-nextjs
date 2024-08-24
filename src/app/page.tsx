@@ -45,7 +45,7 @@ export default function Home() {
 
   return (
     <div>
-      <Header  />
+      <Header />
       <main >
         <div className="bg-purpleDark px-32 max-[1024px]:px-16">
           {isLoading || notices.length == 0 ? <Skeleton scale={1} withImage={true} /> : <Highlight data={notices[0]} />}
@@ -77,12 +77,11 @@ export default function Home() {
           </div>
           <section className="flex justify-center gap-16 py-8 flex-wrap">
             {!isLoading && notices.length > 0 && notices.slice((page * 8), (page * 8) + 8).map((notice) => {
-              return <Card withImage={true} scale={0.6} data={notice} />
+              return <Card withImage={true} scale={0.6} data={notice} key={notice.id} />
             })}
             {isLoading && (
-              // eslint-disable-next-line @typescript-eslint/no-unused-vars
-              [1, 2, 3, 4, 5, 6, 7, 8].map(_ => (
-                <Skeleton scale={0.6} withImage={true} />
+              [1, 2, 3, 4, 5, 6, 7, 8].map(index => (
+                <Skeleton scale={0.6} withImage={true} key={index} />
               ))
             )}
           </section>

@@ -24,13 +24,6 @@ export default function Login() {
 
     const { updateUser, user } = useUser();
 
-    if (Object.keys(errors).length > 0) {
-        for (const key in errors) {
-            const _key = key as "email" | "password"
-            const mensagem = errors[_key]?.message as string
-            toast.error(mensagem, { duration: 1000 })
-        }
-    }
 
     useEffect(() => {
         if (user.isLogged) {
@@ -38,11 +31,22 @@ export default function Login() {
         }
     }, [])
 
+    useEffect(() => {
+        if (Object.keys(errors).length > 0) {
+            for (const key in errors) {
+                const _key = key as "email" | "password"
+                const mensagem = errors[_key]?.message as string
+                toast.error(mensagem, { duration: 1000 })
+            }
+        }
+    }, [errors])
+
     const loginUser = async (dataForm: IUserLogin) => {
         const { msg, error, token, auth, username, id } = await loginUserService(
             dataForm,
         );
 
+        console.log(error, msg)
 
         setButtonIsDisabled(true);
         if (!error) {

@@ -26,7 +26,6 @@ export default function UserProvider(props: IPropsUserContenxt) {
     useEffect(() => {
         const verifyToken = async () => {
             const token = Cookies.get("USER-TOKEN");
-            console.log(document.cookie)
             console.log(token)
             if (token) {
                 const tokenDecoded = jwtDecode(token) as JwtPayload;

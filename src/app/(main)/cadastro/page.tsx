@@ -22,13 +22,15 @@ export default function Login() {
     });
     const { user } = useUser();
 
-    if (Object.keys(errors).length > 0) {
-        for (const key in errors) {
-            const _key = key as "username" | "name" | "email" | "password" | "confirmPassword";
-            const mensagem = errors[_key]?.message as string
-            toast.error(mensagem, { duration: 1000 })
+    useEffect(() => {
+        if (Object.keys(errors).length > 0) {
+            for (const key in errors) {
+                const _key = key as "username" | "name" | "email" | "password" | "confirmPassword";
+                const mensagem = errors[_key]?.message as string
+                toast.error(mensagem, { duration: 1000 })
+            }
         }
-    }
+    }, [errors])
 
     useEffect(() => {
         if (user.isLogged) {
