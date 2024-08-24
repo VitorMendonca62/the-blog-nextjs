@@ -3,10 +3,11 @@
 import Card from "@/client/components/Card";
 import Header from "@/client/components/Header";
 import Skeleton from "@/client/components/ui/Skeleton";
+import useUser from "@/client/hooks/useUser";
 import { getFilterNotice } from "@/client/services/notice.service";
 import { useQuery } from "@tanstack/react-query";
 import { useParams } from "next/navigation"
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 export default function Title() {
     const { title } = useParams()
@@ -27,6 +28,7 @@ export default function Title() {
         refetchOnReconnect: false,
         refetchOnMount: false,
     });
+
 
     return (
         <>

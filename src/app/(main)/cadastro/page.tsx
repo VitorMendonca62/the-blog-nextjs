@@ -1,10 +1,11 @@
 "use client"
 
 import InputForms from "@/client/components/ui/inputForms";
+import useUser from "@/client/hooks/useUser";
 import { createUserService } from "@/client/services/user.service";
 import { userPostSchema } from "@/shared/schemas/user";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import toast, { Toaster } from "react-hot-toast"
 
@@ -19,6 +20,13 @@ export default function Login() {
     } = useForm<IUserInput>({
         resolver: zodResolver(userPostSchema),
     });
+    const { user } = useUser();
+
+    useEffect(() => {
+        if (user.isLogged) {
+            location.href = "/"
+        }
+    }, [])
 
     const loginUser = async (dataForm: IUserInput) => {
         const { msg, error } = await createUserService(dataForm);

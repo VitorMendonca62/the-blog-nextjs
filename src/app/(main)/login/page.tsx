@@ -5,7 +5,7 @@ import useUser from "@/client/hooks/useUser";
 import { loginUserService } from "@/client/services/user.service";
 import { userLoginSchema } from "@/shared/schemas/user";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import toast, { Toaster } from "react-hot-toast"
 import Cookies from 'js-cookie';
@@ -21,10 +21,16 @@ export default function Login() {
     } = useForm<IUserInput>({
         resolver: zodResolver(userLoginSchema),
     });
+    
+    const { updateUser, user } = useUser();
 
-    const { updateUser } = useUser();
 
-
+    useEffect(() => {
+      if (user.isLogged) {
+        location.href = "/"
+      }
+    }, [])
+    
     const loginUser = async (dataForm: IUserInput) => {
         const { msg, error, token, auth, username, id } = await loginUserService(
             dataForm,
@@ -53,7 +59,7 @@ export default function Login() {
                 return;
             }
 
-            // location.href = "/"
+            location.href = "/"
         }, 2000);
     };
 

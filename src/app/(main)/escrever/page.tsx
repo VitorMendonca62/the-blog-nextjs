@@ -5,7 +5,7 @@ import useUser from "@/client/hooks/useUser";
 import { createNoticeService } from "@/client/services/notice.service";
 import { noticePostSchema } from "@/shared/schemas/notice";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import toast, { Toaster } from "react-hot-toast"
 
@@ -23,6 +23,12 @@ export default function Escrever() {
 
     const { user } = useUser();
 
+    console.log(user.isLogged)
+    useEffect(() => {
+        if (!user.isLogged) {
+            location.href = "/"
+        }
+    }, [])
     const createNotice = async (dataForm: INoticeInput) => {
         const { msg, error, } = await createNoticeService(
             dataForm,
