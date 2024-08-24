@@ -14,6 +14,8 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+
+  // fetch("http://localhost:3000/api/users"´, {''})
   return (
     <html lang="en">
       <body className={inter.className}>{children}</body>
