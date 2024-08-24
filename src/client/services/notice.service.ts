@@ -9,7 +9,7 @@ export const api = axios.create({
 export const getAllNotices = async () => {
   try {
     const response = await api.get('');
-    console.log(response)
+    console.log(response);
     const { data } = response;
     return data;
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -35,7 +35,9 @@ export const getOneNoticee = async (id: string) => {
 export const getFilterNotice = async (title: string) => {
   const notices = (await getAllNotices()).data as INotice[];
 
-  return notices.filter((notice) => notice.title.includes(title));
+  return notices.filter((notice) =>
+    notice.title.toLocaleLowerCase().includes(title.toLocaleLowerCase()),
+  );
 };
 
 export const createNoticeService = async (dataForms: INoticeInput) => {
