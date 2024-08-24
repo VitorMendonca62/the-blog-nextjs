@@ -13,7 +13,7 @@ interface IPropsInputForms {
 }
 
 export default function InputForms(props: IPropsInputForms) {
-  const { title, type, placeholder, nameInput, register, errors} = props;
+  const { title, type, placeholder, nameInput, register, errors } = props;
   return (
     <div className="mb-6">
       <label
@@ -32,9 +32,17 @@ export default function InputForms(props: IPropsInputForms) {
         step={0.01}
         {...register(nameInput.toString())}
       />
-      <span
-        aria-label={nameInput}
-        className="absolute text-sm text-[#F00]"
-      >{errors[nameInput]?.message}</span>
+      {nameInput == "title" || nameInput == "slug" ? (
+        <span
+          aria-label={nameInput}
+          className="absolute text-sm text-[#F00]"
+        >{(errors as FieldErrors<INoticeInput>)[nameInput]?.message}</span>
+      ) : (
+        <span
+          aria-label={nameInput}
+          className="absolute text-sm text-[#F00]"
+        >{(errors as FieldErrors<IUserInput>)[nameInput]?.message}</span>
+      )}
+
     </div>)
 }
