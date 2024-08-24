@@ -1,8 +1,13 @@
 import type { Metadata } from "next";
-import { Inter } from "next/font/google";
+import { Roboto } from "next/font/google";
 import "./globals.css";
+import "@/client/styles/output.css"
+import { ReactQueryClientProvider } from "@/client/components/ReactQueryClientProvider";
 
-const inter = Inter({ subsets: ["latin"] });
+const roboto = Roboto({
+  subsets: ["latin"],
+  weight: ["100", "300", "400", "500", "700", "900"]
+});
 
 export const metadata: Metadata = {
   title: "Create Next App",
@@ -15,10 +20,11 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
 
-  // fetch("http://localhost:3000/api/users"´, {''})
   return (
-    <html lang="en">
-      <body className={inter.className}>{children}</body>
-    </html>
+    <ReactQueryClientProvider>
+      <html lang="en">
+        <body className={roboto.className} >{children}</body>
+      </html>
+    </ReactQueryClientProvider>
   );
 }

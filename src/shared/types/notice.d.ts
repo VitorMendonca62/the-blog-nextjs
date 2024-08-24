@@ -6,6 +6,6 @@ interface INoticeInput {
 }
 interface INotice extends INoticeInput {
   id: string;
-  createdAt: Date;
-  updatedAt: Date;
+  createdAt: Timestamp;
+  updatedAt: Timestamp;
 }

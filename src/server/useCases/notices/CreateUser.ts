@@ -1,5 +1,5 @@
 import { v4 } from 'uuid';
-import { addDoc } from 'firebase/firestore';
+import { addDoc, Timestamp } from 'firebase/firestore';
 import { noticesRef } from '@/server/lib/firebase';
 
 export default class CreateNoticeUseCase {
@@ -7,7 +7,7 @@ export default class CreateNoticeUseCase {
     try {
       const { author, category, slug, title } = notice;
       const id = v4().slice(0, 13);
-      const dateNow = new Date();
+      const dateNow = Timestamp.now();
 
       const _notice: INotice = {
         id,
