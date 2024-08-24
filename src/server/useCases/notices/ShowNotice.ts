@@ -1,5 +1,4 @@
-import { v4 } from 'uuid';
-import { addDoc, getDocs, query, where } from 'firebase/firestore';
+import {  getDocs, query, where } from 'firebase/firestore';
 import { noticesRef } from '@/server/lib/firebase';
 
 export default class ShowNoticeUseCase {

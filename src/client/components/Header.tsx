@@ -11,7 +11,8 @@ export default function Header() {
     const inputRef = useRef<HTMLInputElement | null>(null)
     const { logoutUser, user } = useUser();
 
-    const changeSearch = (event: SubmitEvent) => {
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    const changeSearch = (event: any) => {
         event.preventDefault()
         if (inputRef) {
             location.href = `/pesquisa/${inputRef.current?.value}`

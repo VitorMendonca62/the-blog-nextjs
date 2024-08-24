@@ -31,7 +31,7 @@ export async function POST(req: NextRequest) {
     });
 
     return responseNext;
-  } catch (err: any) {
+  } catch (err: unknown) {
     const responseErrorInServer = errorInServer(err);
 
     return NextResponse.json(responseErrorInServer, {

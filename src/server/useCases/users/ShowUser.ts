@@ -1,5 +1,5 @@
-import { collection, getDocs, query, where } from 'firebase/firestore';
-import { firestore, usersRef } from '@/server/lib/firebase';
+import { getDocs, query, where } from 'firebase/firestore';
+import { usersRef } from '@/server/lib/firebase';
 
 type Atribbute = 'username' | 'email' | 'id';
 

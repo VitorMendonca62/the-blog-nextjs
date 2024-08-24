@@ -6,14 +6,14 @@ interface IPropsInputForms {
   title: string;
   type: TypesInput;
   placeholder: string;
-  nameInput: string;
+  nameInput: "username" | "name" | "email" | "password" | "confirmPassword" | "title" | "slug";
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   register: any;
-  errors: FieldErrors<IUserInput>
+  errors: FieldErrors<IUserInput | INoticeInput>
 }
 
 export default function InputForms(props: IPropsInputForms) {
-  const { title, type, placeholder, nameInput, register, errors } = props;
+  const { title, type, placeholder, nameInput, register } = props;
   return (
     <div className="mb-6">
       <label
@@ -32,9 +32,5 @@ export default function InputForms(props: IPropsInputForms) {
         step={0.01}
         {...register(nameInput.toString())}
       />
-      <span
-        aria-label={nameInput}
-        className="absolute text-sm text-[#F00]"
-      >{errors[nameInput]?.message}</span>
     </div>)
 }
