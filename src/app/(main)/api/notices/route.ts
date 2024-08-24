@@ -16,11 +16,10 @@ export async function POST(req: NextRequest) {
   }
 
   try {
-    const { author, category, slug, title } = body;
+    const { author,  slug, title } = body;
 
     const notice: INoticeInput = {
       author,
-      category,
       slug,
       title,
     };
@@ -36,7 +35,7 @@ export async function POST(req: NextRequest) {
   }
 }
 
-export async function GET(req: NextRequest) {
+export async function GET() {
   try {
     const showNoticeUseCase = new ShowNoticeUseCase();
     const response = await showNoticeUseCase.all();

@@ -29,13 +29,6 @@ export async function POST(req: NextRequest) {
     const responseNext = NextResponse.json(response, {
       status: response.status,
     });
-    responseNext.cookies.set('USER-TOKEN', response.token as string, {
-      httpOnly: true,
-      path: '/',
-      maxAge: 60 * 60 * 24 * 7,
-      secure: true,
-      sameSite: 'strict',
-    });
 
     return responseNext;
   } catch (err: any) {

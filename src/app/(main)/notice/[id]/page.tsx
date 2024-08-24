@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 "use client"
 
 import Header from "@/client/components/Header";
@@ -18,7 +19,6 @@ export default function PostId() {
         queryFn: async () => {
             try {
                 const notice = await getOneNoticee(id as string)
-                console.log(notice)
                 setNotice(notice.data)
 
             } catch (err) {

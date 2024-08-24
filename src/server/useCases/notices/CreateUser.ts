@@ -5,7 +5,7 @@ import { noticesRef } from '@/server/lib/firebase';
 export default class CreateNoticeUseCase {
   async execute(notice: INoticeInput) {
     try {
-      const { author, category, slug, title } = notice;
+      const { author, slug, title } = notice;
       const id = v4().slice(0, 13);
       const dateNow = Timestamp.now();
 
@@ -13,7 +13,6 @@ export default class CreateNoticeUseCase {
         id,
         title,
         author,
-        category,
         slug,
         createdAt: dateNow,
         updatedAt: dateNow,

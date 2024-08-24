@@ -22,3 +22,18 @@ interface IUser {
   createdAt: Date;
   updatedAt: Date;
 }
+
+
+interface IUserDataContext {
+  id: string;
+  username: string;
+  auth: boolean;
+  isLogged: boolean;
+  token: string | null;
+}
+
+interface IUserContext {
+  user: IUserDataContext;
+  updateUser: (newUser: IUserDataContext) => void;
+  logoutUser: () => void;
+}

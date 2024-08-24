@@ -5,9 +5,8 @@ const expiresIn = '3D';
 
 export function generateToken(user: IUser) {
   const data = Object();
-  data.name = user.name;
+  data.username = user.username;
   data.id = user.id;
-  data.email = user.email;
 
   return jwt.sign(data, secret, { expiresIn });
 }

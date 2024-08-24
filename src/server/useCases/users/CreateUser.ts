@@ -3,7 +3,6 @@ import { v4 } from 'uuid';
 import bcrypt from 'bcryptjs';
 import { auth, usersRef } from '../../lib/firebase';
 import { addDoc } from 'firebase/firestore';
-import { errorInServer } from '../../utils/errorInServer';
 import { createUserWithEmailAndPassword } from 'firebase/auth';
 
 export default class CreateUserUseCase {
@@ -52,7 +51,7 @@ export default class CreateUserUseCase {
         updatedAt: dateNow,
       };
 
-      await createUserWithEmailAndPassword(auth, email, password);
+      await createUserWithEmailAndPassword(auth, email, _password);
       await addDoc(usersRef, _user);
 
       return {
@@ -62,6 +61,7 @@ export default class CreateUserUseCase {
         data: {},
       };
     } catch (err: unknown) {
+      console.log(err)
       return {
         error: true,
         status: 500,

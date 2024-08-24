@@ -9,7 +9,7 @@ interface IProps {
 
 export default function Highlight(props: IProps) {
     return (
-        <section className="bg-purpleDark flex gap-6 justify-between py-6 border-b-4 border-green border-solid">
+        <section className="bg-purpleDark flex gap-6 justify-center py-6 border-b-4 border-green border-solid flex-wrap ">
             <div className="flex flex-col gap-4">
                 <h2 className="text-4xl max-w-[500px] text-purpleLigth font-bold">
                     {props.data?.title}

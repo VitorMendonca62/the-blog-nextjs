@@ -23,14 +23,14 @@ export default function Card(props: IProps) {
     const year = dateCreate.getFullYear()
 
     const goToNotice = (id: string) => {
-        router.push(`notice/${id}`)
+        router.push(`/notice/${id}`)
     }
     return (
         <div className={`w-[${559 * props.scale}x] hover:bg-whiteDark p-2 cursor-pointer rounded-xl`} onClick={() => goToNotice(props.data.id)}>
             {props.withImage && <Image src="/image.png" alt="dawd" width={599 * props.scale} height={342 * props.scale} />}
 
             <p className="pt-2 pb-4" >{month} {day}, {year}</p>
-            <h3 className="text-purpleDark font-bold text-2xl pb-4">{props.data?.title}</h3>
+            <h3 className={`text-purpleDark font-bold text-2xl pb-4 max-w-[${599 * props.scale}px]`}>{props.data?.title}</h3>
             <p className={`max-w-[${599 * props.scale}px] text-justify`}>{props.data?.slug.slice(0, 200)}{props.data?.slug.length > 200 && "..."}
             </p>
             <span className="hidden max-w-[599px] "></span>

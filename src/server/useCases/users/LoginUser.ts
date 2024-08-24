@@ -1,7 +1,6 @@
 import ShowUser from './ShowUser';
 import bcrypt from 'bcryptjs';
 import { generateToken } from '@/server/lib/jwt';
-import { errorInServer } from '../../utils/errorInServer';
 import { auth, signInWithEmailAndPassword } from '../../lib/firebase';
 
 export default class LoginUser {
@@ -21,6 +20,8 @@ export default class LoginUser {
       return {
         auth: true,
         token,
+        username: user?.username,
+        id: user?.id,
         msg: 'Usuário logado com sucesso!',
         error: false,
         status: 201,
@@ -31,7 +32,7 @@ export default class LoginUser {
         error: true,
         status: 404,
         msg: 'Email ou senha estão incorretos.',
-        data: {},
+        data: { err },
       };
     }
   }

@@ -1,12 +1,14 @@
 "use client"
 
 import InputForms from "@/client/components/ui/inputForms";
-import { createUserService } from "@/client/services/user.service";
-import { userPostSchema } from "@/shared/schemas/user";
+import useUser from "@/client/hooks/useUser";
+import { loginUserService } from "@/client/services/user.service";
+import { userLoginSchema } from "@/shared/schemas/user";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
 import toast, { Toaster } from "react-hot-toast"
+import Cookies from 'js-cookie';
 
 
 export default function Login() {
@@ -17,11 +19,17 @@ export default function Login() {
         handleSubmit,
         formState: { errors },
     } = useForm<IUserInput>({
-        resolver: zodResolver(userPostSchema),
+        resolver: zodResolver(userLoginSchema),
     });
 
+    const { updateUser } = useUser();
+
+
     const loginUser = async (dataForm: IUserInput) => {
-        const { msg, error } = await createUserService(dataForm);
+        const { msg, error, token, auth, username, id } = await loginUserService(
+            dataForm,
+        );
+
 
         setButtonIsDisabled(true);
         if (!error) {
@@ -29,13 +37,23 @@ export default function Login() {
         } else {
             toast.error(msg, { duration: 1000 })
         }
-
+        if (!error) {
+            Cookies.set("USER-TOKEN", token)
+            updateUser({
+                id,
+                auth,
+                isLogged: !error,
+                token,
+                username
+            });
+        }
         setTimeout(() => {
-            setButtonIsDisabled(false);
-
-            if (!error) {
-                location.href = "/login"
+            if (error) {
+                setButtonIsDisabled(false);
+                return;
             }
+
+            // location.href = "/"
         }, 2000);
     };
 
@@ -47,23 +65,7 @@ export default function Login() {
             />
 
             <form className="w-[25rem] bg-[#fff] p-4 rounded-lg" onSubmit={handleSubmit(loginUser)}>
-                <h3 className="text-purpleDark font-bold text-2xl pb-4">Cadastro</h3>
-                <InputForms
-                    nameInput="username"
-                    placeholder="vitorqueiroz325"
-                    title="Username"
-                    type="text"
-                    register={register}
-                    errors={errors}
-                />
-                <InputForms
-                    nameInput="name"
-                    placeholder="vitor queiroz"
-                    title="Nome"
-                    type="text"
-                    register={register}
-                    errors={errors}
-                />
+                <h3 className="text-purpleDark font-bold text-2xl pb-4">Login</h3>
                 <InputForms
                     nameInput="email"
                     placeholder="vitorqueiroz325@gmail.com"
@@ -82,17 +84,8 @@ export default function Login() {
                     errors={errors}
                 />
 
-                <InputForms
-                    nameInput="confirmPassword"
-                    placeholder="********"
-                    title="Confirmar senha"
-                    type="password"
-                    register={register}
-                    errors={errors}
-                />
 
-
-                <button type="submit" disabled={buttonIsDisabled} className="text-white mt-4 disabled:opacity-5 bg-purpleDark hover:bg-purpleInput focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center ">Cadastrar</button>
+                <button type="submit" disabled={buttonIsDisabled} className="text-white mt-4 disabled:opacity-5 bg-purpleDark hover:bg-purpleInput focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center ">Entrar</button>
             </form>
 
         </div>

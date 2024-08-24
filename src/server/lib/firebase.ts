@@ -2,6 +2,8 @@ import { initializeApp } from 'firebase/app';
 import { collection, getFirestore } from 'firebase/firestore';
 import { getAuth, signInWithEmailAndPassword } from 'firebase/auth';
 
+
+// ISSO VAI SER APAGADO DPS, SEM PROBLEMA
 const firebaseConfig = {
   apiKey: 'AIzaSyAX5d4sBWJiva0J7OPKThhd_5Vh-E0YYhU',
   authDomain: 'desafio-atom.firebaseapp.com',
