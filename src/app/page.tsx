@@ -76,7 +76,7 @@ export default function Home() {
 
           </div>
           <section className="flex justify-center gap-16 py-8 flex-wrap">
-            {!isLoading && notices.length > 0 && notices.slice((page * 4), (page * 4) + 8).map((notice) => {
+            {!isLoading && notices.length > 0 && notices.slice((page * 8), (page * 8) + 8).map((notice) => {
               return <Card withImage={true} scale={0.6} data={notice} />
             })}
             {isLoading && (
