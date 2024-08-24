@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-const API_URL = 'http://localhost:3000/api/notices';
+const API_URL = 'https://desafio-atom-omega.vercel.app/api/notices';
 
 export const api = axios.create({
   baseURL: API_URL,
@@ -9,8 +9,8 @@ export const api = axios.create({
 export const getAllNotices = async () => {
   try {
     const response = await api.get('');
+    console.log(response)
     const { data } = response;
-
     return data;
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
   } catch (err: any) {
