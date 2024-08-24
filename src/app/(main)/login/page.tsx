@@ -6,7 +6,7 @@ import { loginUserService } from "@/client/services/user.service";
 import { userLoginSchema } from "@/shared/schemas/user";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useEffect, useState } from "react";
-import { useForm } from "react-hook-form";
+import { FieldErrors, useForm } from "react-hook-form";
 import toast, { Toaster } from "react-hot-toast"
 import Cookies from 'js-cookie';
 
@@ -18,20 +18,27 @@ export default function Login() {
         register,
         handleSubmit,
         formState: { errors },
-    } = useForm<IUserInput>({
+    } = useForm<IUserLogin>({
         resolver: zodResolver(userLoginSchema),
     });
-    
+
     const { updateUser, user } = useUser();
 
+    if (Object.keys(errors).length > 0) {
+        for (const key in errors) {
+            const _key = key as "email" | "password"
+            const mensagem = errors[_key]?.message as string
+            toast.error(mensagem, { duration: 1000 })
+        }
+    }
 
     useEffect(() => {
-      if (user.isLogged) {
-        location.href = "/"
-      }
+        if (user.isLogged) {
+            location.href = "/"
+        }
     }, [])
-    
-    const loginUser = async (dataForm: IUserInput) => {
+
+    const loginUser = async (dataForm: IUserLogin) => {
         const { msg, error, token, auth, username, id } = await loginUserService(
             dataForm,
         );

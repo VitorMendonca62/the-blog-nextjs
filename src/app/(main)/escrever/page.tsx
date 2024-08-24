@@ -23,7 +23,14 @@ export default function Escrever() {
 
     const { user } = useUser();
 
-    console.log(user.isLogged)
+    if (Object.keys(errors).length > 0) {
+        for (const key in errors) {
+            const _key = key as "title" | "slug"
+            const mensagem = errors[_key]?.message as string
+            toast.error(mensagem, { duration: 1000 })
+        }
+    }
+
     useEffect(() => {
         if (!user.isLogged) {
             location.href = "/"
