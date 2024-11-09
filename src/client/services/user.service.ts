@@ -21,7 +21,7 @@ export const loginUserService = async (dataForms: IUserLogin) => {
 
 export const helloWorld = async () => {
   try {
-    const response = await api.get('/users");
+    const response = await api.get('/users');
     const { data } = response;
     return data;
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
