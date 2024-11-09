@@ -4,6 +4,10 @@ import { verifySchema } from '@/shared/utils/verifySchema';
 import CreateUserUseCase from '@/server/useCases/users/CreateUser';
 import { errorInServer } from '@/server/utils/errorInServer';
 
+export async function GET(req: NextRequest) {
+    return NextResponse.json({hello: "world"}, { status: 200 });
+}
+
 export async function POST(req: NextRequest) {
   const body = { ...(await req.json()) } as IUserInput;
   const resultVerifySchema = verifySchema(body, userPostSchema);
