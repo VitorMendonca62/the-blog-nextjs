@@ -19,6 +19,18 @@ export const loginUserService = async (dataForms: IUserLogin) => {
   }
 };
 
+export const helloWorld = async () => {
+  try {
+    const response = await api.get('/users");
+    const { data } = response;
+    return data;
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  } catch (err: any) {
+    const { data } = err.response;
+    return data;
+  }
+};
+
 export const createUserService = async (dataForms: IUserInput) => {
   try {
     const response = await api.post('/users', dataForms);
