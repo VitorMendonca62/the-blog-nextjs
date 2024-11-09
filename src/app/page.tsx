@@ -4,7 +4,7 @@ import Card from "@/client/components/Card";
 import Header from "@/client/components/Header";
 import Highlight from "@/client/components/Highlight";
 import { getAllNotices } from "@/client/services/notice.service";
-import { helloWorld  } from "@/client/services/users.service";
+import { helloWorld  } from "@/client/services/user.service";
 import { useState } from "react";
 import { useQuery } from "@tanstack/react-query"
 import Skeleton from "@/client/components/ui/Skeleton";
