@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-const API_URL = 'https://desafio-atom-omega.vercel.app/api';
+const API_URL = 'https://red-sea-001f3bc0f.5.azurestaticapps.net/';
 // const API_URL = 'http://localhost:3000/api';
 
 export const api = axios.create({
