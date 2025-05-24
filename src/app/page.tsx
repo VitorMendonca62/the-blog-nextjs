@@ -58,12 +58,12 @@ export default function Home() {
             }
 
             <aside className="flex flex-col gap-8 ">
-              {isLoading || notices.length == 0 ?
+              {/* {isLoading || notices.length == 0 ?
                 <Skeleton scale={1} withImage={false} /> : <Card withImage={false} scale={1} data={notices[2]} />
               }
               {isLoading || notices.length == 0 ?
                 <Skeleton scale={1} withImage={false} /> : <Card withImage={false} scale={1} data={notices[3]} />
-              }
+              } */}
             </aside>
           </section>
           <div className="flex justify-end items-end gap-4">

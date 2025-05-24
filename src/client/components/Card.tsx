@@ -14,7 +14,7 @@ export default function Card(props: IProps) {
     const router = useRouter()
 
     const months = ["Janeiro", "Fevereiro", "Marco", "Abril", "Maio", "Junho", "Julho", "Agosto", "Septembro", "Outubro", "Novembro", "Dezembro"]
-
+    console.log(props)
     const { seconds, nanoseconds } = props.data.createdAt
     const milliseconds = seconds * 1000 + Math.floor(nanoseconds / 1000000);
     const dateCreate = new Date(milliseconds)
