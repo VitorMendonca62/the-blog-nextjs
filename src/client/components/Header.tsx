@@ -65,7 +65,7 @@ export default function Header() {
     }
 
     return (
-        <header className='bg-green text-white border-b border-greenHover border-solid shadow-md sticky w-screen'>
+        <header className='bg-green text-white border-b border-greenHover border-solid shadow-md sticky'>
             <div className='w-9/12 mx-auto px-3 py-3 flex justify-between items-center max-xl:w-11/12'>
                 <h1 className='text-3xl font-bold'>TheNextJSBlog</h1>
 
