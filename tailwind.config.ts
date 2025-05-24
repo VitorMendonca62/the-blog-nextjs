@@ -22,7 +22,7 @@ const config: Config = {
           '100%': {
             opacity: '1',
             height: 'auto',
-            transform: 'translateY(0)',
+            transform: 'translateY(0)', 
           },
         },
       },
