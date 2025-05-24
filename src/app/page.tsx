@@ -4,7 +4,6 @@ import Card from "@/client/components/Card";
 import Header from "@/client/components/Header";
 import Highlight from "@/client/components/Highlight";
 import { getAllNotices } from "@/client/services/notice.service";
-import { helloWorld  } from "@/client/services/user.service";
 import { useState } from "react";
 import { useQuery } from "@tanstack/react-query"
 import Skeleton from "@/client/components/ui/Skeleton";
@@ -21,7 +20,6 @@ export default function Home() {
       try {
         const notices = await getAllNotices()
         setNotices(notices.data)
-        console.log(await helloWorld());
 
       } catch (err) {
         console.log(err);

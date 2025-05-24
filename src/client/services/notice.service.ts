@@ -1,7 +1,7 @@
 import axios from 'axios';
 
-const API_URL = 'https://red-sea-001f3bc0f.5.azurestaticapps.net/api/notices';
-// const API_URL = 'http://localhost:3000/api/notices';
+// const API_URL = 'https://red-sea-001f3bc0f.5.azurestaticapps.net/api/notices';
+const API_URL = 'http://localhost:3000/api/notices';
 
 export const api = axios.create({
   baseURL: API_URL,

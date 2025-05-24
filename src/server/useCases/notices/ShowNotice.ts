@@ -1,4 +1,6 @@
-import {  getDocs, query, where } from 'firebase/firestore';
+/** @format */
+
+import { getDocs, query, where } from 'firebase/firestore';
 import { noticesRef } from '@/server/lib/firebase';
 
 export default class ShowNoticeUseCase {

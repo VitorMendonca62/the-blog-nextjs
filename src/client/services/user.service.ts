@@ -1,7 +1,7 @@
 import axios from 'axios';
 
-const API_URL = 'https://red-sea-001f3bc0f.5.azurestaticapps.net/api';
-// const API_URL = 'http://localhost:3000/api';
+// const API_URL = 'https://red-sea-001f3bc0f.5.azurestaticapps.net/api';
+const API_URL = 'http://localhost:3000/api';
 
 export const api = axios.create({
   baseURL: API_URL,
@@ -19,17 +19,6 @@ export const loginUserService = async (dataForms: IUserLogin) => {
   }
 };
 
-export const helloWorld = async () => {
-  try {
-    const response = await api.get('/users');
-    const { data } = response;
-    return data;
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  } catch (err: any) {
-    const { data } = err.response;
-    return data;
-  }
-};
 
 export const createUserService = async (dataForms: IUserInput) => {
   try {

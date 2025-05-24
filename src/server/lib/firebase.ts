@@ -1,17 +1,18 @@
+/** @format */
+
 import { initializeApp } from 'firebase/app';
 import { collection, getFirestore } from 'firebase/firestore';
 import { getAuth, signInWithEmailAndPassword } from 'firebase/auth';
 
-
-// ISSO VAI SER APAGADO DPS, SEM PROBLEMA
 const firebaseConfig = {
-  apiKey: 'AIzaSyAX5d4sBWJiva0J7OPKThhd_5Vh-E0YYhU',
-  authDomain: 'desafio-atom.firebaseapp.com',
-  projectId: 'desafio-atom',
-  storageBucket: 'desafio-atom.appspot.com',
-  messagingSenderId: '84381624314',
-  appId: '1:84381624314:web:33f1ee386d71c1314d6643',
+  apiKey: process.env.NEXT_PUBLIC_FIREBASE_API_KEY as string,
+  authDomain: 'the-blog-nextjs.firebaseapp.com',
+  projectId: 'the-blog-nextjs',
+  storageBucket: 'the-blog-nextjs.firebasestorage.app',
+  messagingSenderId: '777606183616',
+  appId: process.env.NEXT_PUBLIC_FIREBASE_APP_ID as string,
 };
+
 
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);
