@@ -1,49 +1,114 @@
 "use client"
 
-import Link from "next/link"
-import { useRef } from "react"
-import { FaSearch } from "react-icons/fa"
-import useUser from "../hooks/useUser"
-
+import { IconType } from 'react-icons';
+import { FaUserPlus, FaSignOutAlt, FaSearch, FaHamburger } from 'react-icons/fa'
+import { IoEnterOutline, IoMenu } from "react-icons/io5";
+import { CiPen } from "react-icons/ci";
+import useUser from '../hooks/useUser';
+import { use, useState } from 'react';
 
 export default function Header() {
+    const [menuMobileIsVisible, setMenuMobileIsVisible] = useState<boolean>(false);
+    const { user } = useUser();
 
-    const inputRef = useRef<HTMLInputElement | null>(null)
-    const { logoutUser, user } = useUser();
 
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    const changeSearch = (event: any) => {
-        event.preventDefault()
-        if (inputRef) {
-            location.href = `/pesquisa/${inputRef.current?.value}`
-        }
+    // Componentes menores
+    const NavWithUserLogged = () => {
+        return <>
+            <li className='flex'>
+                <ButtonWitouthBackground text='Cadastrar' Icon={FaUserPlus} />
+            </li>
+            <li className='flex'>
+                <ButtonWithBackground text='Entrar' Icon={IoEnterOutline} />
+            </li>
+        </>
     }
+
+    const NavWithUserLoggedOut = () => {
+        return <>
+            <li className='flex'>
+                <ButtonWithBackground text='Escrever Post' Icon={CiPen} />
+            </li>
+            <li className='flex'>
+                <ButtonWitouthBackground text='Sair' Icon={FaSignOutAlt} />
+            </li>
+        </>
+    }
+
+    const ButtonWithBackground = (props: { text: string, Icon: IconType }) => {
+        const { text, Icon } = props;
+
+        return (
+            <button className='flex items-center bg-white text-green gap-2 px-3 py-2 rounded-lg hover:bg-whiteDark transition-colors duration-300'>
+                <Icon />
+                {text}
+            </button>
+        )
+    }
+    const ButtonWitouthBackground = (props: { text: string, Icon: IconType }) => {
+        const { text, Icon } = props;
+
+        return (
+            <button className='flex items-center gap-2 px-3 py-2 rounded-lg hover:bg-greenHover transition-colors duration-300'>
+                <Icon />
+                {text}
+            </button>
+        )
+    }
+
+    const Search = () => {
+        return (
+            <div className='bg-white w-full relative flex items-center rounded-lg py-1.5'>
+                <FaSearch className='absolute text-greenGray left-2' />
+                <input type="text" className='pl-9 pr-2 w-full outline-none border-none text-gray-900 bg-transparent ' placeholder='Buscar posts...' />
+            </div>
+        )
+    }
+
+
     return (
-        <header className="bg-purpleDark flex justify-between items-center px-32 max-[1024px]:px-16 py-7 ">
-            <h1 className="text-4xl font-bold text-white"><Link href="/">The Blog</Link><span className="text-green">.</span></h1>
-            <nav className="">
-                <ul className="flex justify-between gap-6 text-white text-lg">
-                    <li><Link href="/" className="border-s-4 ps-2 border-transparent border-solid hover:border-green hover:font-medium">Home</Link></li>
-                    <li><Link href="/#contato" className="border-s-4 ps-2 border-transparent border-solid hover:border-green hover:font-medium">Informações</Link></li>
+        <header className='bg-green text-white px-3 py-3'>
+            <div className='w-2/3 mx-auto flex justify-between items-center max-xl:w-11/12'>
+                <h1 className='text-3xl font-bold'>TheNextJSBlog</h1>
 
+                {/* Desktop navigation */}
+                <div className='w-1/3 max-mdx:hidden'>
+                    <Search />
+                </div>
+                <nav className='max-mdx:hidden'>
+                    <ul className='flex gap-6'>
+                        {user ? <NavWithUserLogged /> : <NavWithUserLoggedOut />}
+                    </ul>
+                </nav>
+
+                {/* Mobile navigation */}
+                <button className='flex items-center gap-2 px-3 py-2 rounded-lg hover:bg-greenHover transition-colors duration-300 mdx:hidden' onClick={() => setMenuMobileIsVisible(!menuMobileIsVisible)}>
+                    <IoMenu className='text-2xl' />
+                </button>
+
+            </div>
+            {/* MObile navigatio */}
+            <div
+                className='mdx:hidden w-full overflow-hidden flex flex-col items-center gap-4 transition-all duration-300 ease-out transform'
+                style={
                     {
-                        user.isLogged ? (
-                            <>
-                                <li><Link href="/escrever" className="border-s-4 ps-2 border-transparent border-solid hover:border-green hover:font-medium" >Escrever</Link></li>
-                                <li className="border-s-4 ps-2 border-transparent border-solid hover:border-green hover:font-medium" onClick={logoutUser}>Sair</li>
-                            </>) : (<>
-                                <li><Link href="/login" className="border-s-4 ps-2 border-transparent border-solid hover:border-green hover:font-medium" >Login</Link></li>
-                                <li><Link href="/cadastro" className="border-s-4 ps-2 border-transparent border-solid hover:border-green hover:font-medium" >Cadastro</Link></li>
-                            </>)
-
+                        paddingTop: menuMobileIsVisible ? '1rem' : '0px',
+                        animation: menuMobileIsVisible ? 'slideDown 0.3s ease-out' : 'none',
+                        height: menuMobileIsVisible ? 'auto' : '0px',
+                        opacity: menuMobileIsVisible ? '1' : '0'
                     }
+                }>
+                <div className='w-full'>
+                    <Search />
+                </div>
+                <nav className='flex justify-center'>
+                    <ul className='flex gap-6 flex-col items-center justify-center'>
+                        {user ? <NavWithUserLogged /> : <NavWithUserLoggedOut />}
+                    </ul>
+                </nav>
+            </div>
 
-                </ul>
-            </nav>
-            <form className="flex justify-center items-start" onSubmit={changeSearch}>
-                <input type="text" ref={inputRef} name="search" className="bg-purpleInput ps-4 py-3 pe-2 text-white outline-none border-none rounded-s-xl w-56" placeholder="Buscar" />
-                <button type="submit" className="bg-purpleLigth h-[100%] py-[0.85rem] px-5 rounded-e-xl cursor-pointer hover:bg-[#5e4074]"><FaSearch className="text-xl text-white" /></button>
-            </form>
+
         </header >
     )
 }
