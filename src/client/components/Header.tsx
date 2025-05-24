@@ -11,7 +11,6 @@ export default function Header() {
     const [menuMobileIsVisible, setMenuMobileIsVisible] = useState<boolean>(false);
     const { user } = useUser();
 
-
     // Componentes menores
     const NavWithUserLogged = () => {
         return <>
@@ -65,10 +64,9 @@ export default function Header() {
         )
     }
 
-
     return (
-        <header className='bg-green text-white px-3 py-3'>
-            <div className='w-2/3 mx-auto flex justify-between items-center max-xl:w-11/12'>
+        <header className='bg-green text-white border-b border-greenHover border-solid shadow-md sticky w-screen'>
+            <div className='w-9/12 mx-auto px-3 py-3 flex justify-between items-center max-xl:w-11/12'>
                 <h1 className='text-3xl font-bold'>TheNextJSBlog</h1>
 
                 {/* Desktop navigation */}
