@@ -96,17 +96,15 @@ export default function Header() {
                         opacity: menuMobileIsVisible ? '1' : '0'
                     }
                 }>
-                <div className='w-full'>
+                <div className='w-11/12'>
                     <Search />
                 </div>
-                <nav className='flex justify-center'>
+                <nav className='flex justify-center pb-3'>
                     <ul className='flex gap-6 flex-col items-center justify-center'>
                         {user ? <NavWithUserLogged /> : <NavWithUserLoggedOut />}
                     </ul>
                 </nav>
             </div>
-
-
         </header >
     )
 }
