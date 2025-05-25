@@ -1,10 +1,16 @@
 interface INoticeInput {
   title: string;
-  slug: string;
-  author: string;
+  content: string;
+  photos: string[];
 }
-interface INotice extends INoticeInput {
-  id: string;
+
+interface INoticeInputMeta extends INoticeInput {
+  author: string;
+  authorId: string;
+  authorPhoto: string;
+  comments: number;
+  likes: number;
   createdAt: Timestamp;
   updatedAt: Timestamp;
+  liked: boolean;
 }
